@@ -73,7 +73,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testPathMustBeValid()
     {
-        (new Uri(''))->withPath([]);
+        (new Uri(''))->withPath(array());
     }
 
     /**
@@ -113,49 +113,49 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     public function getResolveTestCases()
     {
-        return [
+        return array(
             //[self::RFC3986_BASE, 'g:h',           'g:h'],
-            [self::RFC3986_BASE, 'g',             'http://a/b/c/g'],
-            [self::RFC3986_BASE, './g',           'http://a/b/c/g'],
-            [self::RFC3986_BASE, 'g/',            'http://a/b/c/g/'],
-            [self::RFC3986_BASE, '/g',            'http://a/g'],
-            [self::RFC3986_BASE, '//g',           'http://g'],
-            [self::RFC3986_BASE, '?y',            'http://a/b/c/d;p?y'],
-            [self::RFC3986_BASE, 'g?y',           'http://a/b/c/g?y'],
-            [self::RFC3986_BASE, '#s',            'http://a/b/c/d;p?q#s'],
-            [self::RFC3986_BASE, 'g#s',           'http://a/b/c/g#s'],
-            [self::RFC3986_BASE, 'g?y#s',         'http://a/b/c/g?y#s'],
-            [self::RFC3986_BASE, ';x',            'http://a/b/c/;x'],
-            [self::RFC3986_BASE, 'g;x',           'http://a/b/c/g;x'],
-            [self::RFC3986_BASE, 'g;x?y#s',       'http://a/b/c/g;x?y#s'],
-            [self::RFC3986_BASE, '',              self::RFC3986_BASE],
-            [self::RFC3986_BASE, '.',             'http://a/b/c/'],
-            [self::RFC3986_BASE, './',            'http://a/b/c/'],
-            [self::RFC3986_BASE, '..',            'http://a/b/'],
-            [self::RFC3986_BASE, '../',           'http://a/b/'],
-            [self::RFC3986_BASE, '../g',          'http://a/b/g'],
-            [self::RFC3986_BASE, '../..',         'http://a/'],
-            [self::RFC3986_BASE, '../../',        'http://a/'],
-            [self::RFC3986_BASE, '../../g',       'http://a/g'],
-            [self::RFC3986_BASE, '../../../g',    'http://a/g'],
-            [self::RFC3986_BASE, '../../../../g', 'http://a/g'],
-            [self::RFC3986_BASE, '/./g',          'http://a/g'],
-            [self::RFC3986_BASE, '/../g',         'http://a/g'],
-            [self::RFC3986_BASE, 'g.',            'http://a/b/c/g.'],
-            [self::RFC3986_BASE, '.g',            'http://a/b/c/.g'],
-            [self::RFC3986_BASE, 'g..',           'http://a/b/c/g..'],
-            [self::RFC3986_BASE, '..g',           'http://a/b/c/..g'],
-            [self::RFC3986_BASE, './../g',        'http://a/b/g'],
-            [self::RFC3986_BASE, 'foo////g',      'http://a/b/c/foo////g'],
-            [self::RFC3986_BASE, './g/.',         'http://a/b/c/g/'],
-            [self::RFC3986_BASE, 'g/./h',         'http://a/b/c/g/h'],
-            [self::RFC3986_BASE, 'g/../h',        'http://a/b/c/h'],
-            [self::RFC3986_BASE, 'g;x=1/./y',     'http://a/b/c/g;x=1/y'],
-            [self::RFC3986_BASE, 'g;x=1/../y',    'http://a/b/c/y'],
-            ['http://u@a/b/c/d;p?q', '.',         'http://u@a/b/c/'],
-            ['http://u:p@a/b/c/d;p?q', '.',       'http://u:p@a/b/c/'],
-            ['http://a/b/c/d/', 'e',              'http://a/b/c/d/e'],
-        ];
+            array(self::RFC3986_BASE, 'g',             'http://a/b/c/g'),
+            array(self::RFC3986_BASE, './g',           'http://a/b/c/g'),
+            array(self::RFC3986_BASE, 'g/',            'http://a/b/c/g/'),
+            array(self::RFC3986_BASE, '/g',            'http://a/g'),
+            array(self::RFC3986_BASE, '//g',           'http://g'),
+            array(self::RFC3986_BASE, '?y',            'http://a/b/c/d;p?y'),
+            array(self::RFC3986_BASE, 'g?y',           'http://a/b/c/g?y'),
+            array(self::RFC3986_BASE, '#s',            'http://a/b/c/d;p?q#s'),
+            array(self::RFC3986_BASE, 'g#s',           'http://a/b/c/g#s'),
+            array(self::RFC3986_BASE, 'g?y#s',         'http://a/b/c/g?y#s'),
+            array(self::RFC3986_BASE, ';x',            'http://a/b/c/;x'),
+            array(self::RFC3986_BASE, 'g;x',           'http://a/b/c/g;x'),
+            array(self::RFC3986_BASE, 'g;x?y#s',       'http://a/b/c/g;x?y#s'),
+            array(self::RFC3986_BASE, '',              self::RFC3986_BASE),
+            array(self::RFC3986_BASE, '.',             'http://a/b/c/'),
+            array(self::RFC3986_BASE, './',            'http://a/b/c/'),
+            array(self::RFC3986_BASE, '..',            'http://a/b/'),
+            array(self::RFC3986_BASE, '../',           'http://a/b/'),
+            array(self::RFC3986_BASE, '../g',          'http://a/b/g'),
+            array(self::RFC3986_BASE, '../..',         'http://a/'),
+            array(self::RFC3986_BASE, '../../',        'http://a/'),
+            array(self::RFC3986_BASE, '../../g',       'http://a/g'),
+            array(self::RFC3986_BASE, '../../../g',    'http://a/g'),
+            array(self::RFC3986_BASE, '../../../../g', 'http://a/g'),
+            array(self::RFC3986_BASE, '/./g',          'http://a/g'),
+            array(self::RFC3986_BASE, '/../g',         'http://a/g'),
+            array(self::RFC3986_BASE, 'g.',            'http://a/b/c/g.'),
+            array(self::RFC3986_BASE, '.g',            'http://a/b/c/.g'),
+            array(self::RFC3986_BASE, 'g..',           'http://a/b/c/g..'),
+            array(self::RFC3986_BASE, '..g',           'http://a/b/c/..g'),
+            array(self::RFC3986_BASE, './../g',        'http://a/b/g'),
+            array(self::RFC3986_BASE, 'foo////g',      'http://a/b/c/foo////g'),
+            array(self::RFC3986_BASE, './g/.',         'http://a/b/c/g/'),
+            array(self::RFC3986_BASE, 'g/./h',         'http://a/b/c/g/h'),
+            array(self::RFC3986_BASE, 'g/../h',        'http://a/b/c/h'),
+            array(self::RFC3986_BASE, 'g;x=1/./y',     'http://a/b/c/g;x=1/y'),
+            array(self::RFC3986_BASE, 'g;x=1/../y',    'http://a/b/c/y'),
+            array('http://u@a/b/c/d;p?q', '.',         'http://u@a/b/c/'),
+            array('http://u:p@a/b/c/d;p?q', '.',       'http://u:p@a/b/c/'),
+            array('http://a/b/c/d/', 'e',              'http://a/b/c/d/e'),
+        );
     }
 
     public function testAddAndRemoveQueryValues()
@@ -199,21 +199,21 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     public function pathTestProvider()
     {
-        return [
+        return array(
             // Percent encode spaces.
-            ['http://foo.com/baz bar', 'http://foo.com/baz%20bar'],
+            array('http://foo.com/baz bar', 'http://foo.com/baz%20bar'),
             // Don't encoding something that's already encoded.
-            ['http://foo.com/baz%20bar', 'http://foo.com/baz%20bar'],
+            array('http://foo.com/baz%20bar', 'http://foo.com/baz%20bar'),
             // Percent encode invalid percent encodings
-            ['http://foo.com/baz%2-bar', 'http://foo.com/baz%252-bar'],
+            array('http://foo.com/baz%2-bar', 'http://foo.com/baz%252-bar'),
             // Don't encode path segments
-            ['http://foo.com/baz/bar/bam?a', 'http://foo.com/baz/bar/bam?a'],
-            ['http://foo.com/baz+bar', 'http://foo.com/baz+bar'],
-            ['http://foo.com/baz:bar', 'http://foo.com/baz:bar'],
-            ['http://foo.com/baz@bar', 'http://foo.com/baz@bar'],
-            ['http://foo.com/baz(bar);bam/', 'http://foo.com/baz(bar);bam/'],
-            ['http://foo.com/a-zA-Z0-9.-_~!$&\'()*+,;=:@', 'http://foo.com/a-zA-Z0-9.-_~!$&\'()*+,;=:@'],
-        ];
+            array('http://foo.com/baz/bar/bam?a', 'http://foo.com/baz/bar/bam?a'),
+            array('http://foo.com/baz+bar', 'http://foo.com/baz+bar'),
+            array('http://foo.com/baz:bar', 'http://foo.com/baz:bar'),
+            array('http://foo.com/baz@bar', 'http://foo.com/baz@bar'),
+            array('http://foo.com/baz(bar);bam/', 'http://foo.com/baz(bar);bam/'),
+            array('http://foo.com/a-zA-Z0-9.-_~!$&\'()*+,;=:@', 'http://foo.com/a-zA-Z0-9.-_~!$&\'()*+,;=:@'),
+        );
     }
 
     /**
@@ -257,16 +257,16 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     public function pathTestNoAuthority()
     {
-        return [
+        return array(
             // path-rootless
-            ['urn:example:animal:ferret:nose'],
+            array('urn:example:animal:ferret:nose'),
             // path-absolute
-            ['urn:/example:animal:ferret:nose'],
-            ['urn:/'],
+            array('urn:/example:animal:ferret:nose'),
+            array('urn:/'),
             // path-empty
-            ['urn:'],
-            ['urn'],
-        ];
+            array('urn:'),
+            array('urn'),
+        );
     }
 
     /**
