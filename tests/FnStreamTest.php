@@ -20,9 +20,10 @@ class FnStreamTest extends \PHPUnit_Framework_TestCase
 
     public function testProxiesToFunction()
     {
+        $self = $this;
         $s = new FnStream(array(
-            'read' => function ($len) {
-                $this->assertEquals(3, $len);
+            'read' => function ($len) use ($self) {
+                $self->assertEquals(3, $len);
                 return 'foo';
             }
         ));
