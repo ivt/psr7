@@ -15,7 +15,8 @@ class FnStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowsWhenNotImplemented()
     {
-        (new FnStream(array()))->seek(1);
+        $fnStream = new FnStream(array());
+        $fnStream->seek(1);
     }
 
     public function testProxiesToFunction()

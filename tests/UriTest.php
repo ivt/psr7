@@ -40,7 +40,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     public function testCanTransformAndRetrievePartsIndividually()
     {
-        $uri = (new Uri(''))
+        $uri = new Uri('');
+        $uri = $uri
             ->withFragment('#test')
             ->withHost('example.com')
             ->withPath('path/123')
@@ -65,7 +66,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testPortMustBeValid()
     {
-        (new Uri(''))->withPort(100000);
+        $uri = new Uri('');
+        $uri->withPort(100000);
     }
 
     /**
@@ -73,7 +75,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testPathMustBeValid()
     {
-        (new Uri(''))->withPath(array());
+        $uri = new Uri('');
+        $uri->withPath(array());
     }
 
     /**
@@ -81,7 +84,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueryMustBeValid()
     {
-        (new Uri(''))->withQuery(new \stdClass);
+        $uri = new Uri('');
+        $uri->withQuery(new \stdClass);
     }
 
     public function testAllowsFalseyUrlParts()
@@ -228,19 +232,22 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testDoesNotAddPortWhenNoPort()
     {
         $this->assertEquals('bar', new Uri('//bar'));
-        $this->assertEquals('bar', (new Uri('//bar'))->getHost());
+        $uri = new Uri('//bar');
+        $this->assertEquals('bar', $uri->getHost());
     }
 
     public function testAllowsForRelativeUri()
     {
-        $uri = (new Uri)->withPath('foo');
+        $uri = new Uri;
+        $uri = $uri->withPath('foo');
         $this->assertEquals('foo', $uri->getPath());
         $this->assertEquals('foo', (string) $uri);
     }
 
     public function testAddsSlashForRelativeUriStringWithHost()
     {
-        $uri = (new Uri)->withPath('foo')->withHost('bar.com');
+        $uri = new Uri;
+        $uri = $uri->withPath('foo')->withHost('bar.com');
         $this->assertEquals('foo', $uri->getPath());
         $this->assertEquals('bar.com/foo', (string) $uri);
     }
