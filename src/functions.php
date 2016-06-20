@@ -282,11 +282,12 @@ function try_fopen($filename, $mode)
 {
     $ex = null;
     set_error_handler(function () use ($filename, $mode, &$ex) {
-        $ex = new \RuntimeException(sprintf(
+        $args = func_get_args();
+        $ex   = new \RuntimeException(sprintf(
             'Unable to open %s using mode %s: %s',
             $filename,
             $mode,
-            func_get_args()[1]
+            $args[1]
         ));
     });
 
@@ -455,7 +456,12 @@ function parse_request($message)
         throw new \InvalidArgumentException('Invalid request string');
     }
     $parts = explode(' ', $data['start-line'], 3);
-    $version = isset($parts[2]) ? explode('/', $parts[2])[1] : '1.1';
+    if (isset($parts[2])) {
+        $split   = explode('/', $parts[2]);
+        $version = $split[1];
+    } else {
+        $version = '1.1';
+    }
 
     $request = new Request(
         $parts[0],
@@ -483,11 +489,12 @@ function parse_response($message)
     }
     $parts = explode(' ', $data['start-line'], 3);
 
+    $split = explode('/', $parts[0]);
     return new Response(
         $parts[1],
         $data['headers'],
         $data['body'],
-        explode('/', $parts[0])[1],
+        $split[1],
         isset($parts[2]) ? $parts[2] : null
     );
 }
