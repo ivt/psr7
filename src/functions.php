@@ -508,6 +508,34 @@ if (!defined('PHP_QUERY_RFC3986')) {
 }
 
 /**
+ * Version of parse_url() with PHP bug 62844 fixed for PHP < 5.4.7, 5.5.3, 5.6.0
+ * @param string $url
+ * @param int    $component
+ * @return array|string
+ */
+function parse_url($url, $component = -1) {
+    // PHP bug 62844 is fixed in 5.4.7, 5.5.3 and 5.6.0
+    if (
+        (PHP_VERSION_ID < (PHP_VERSION_ID >= 50500 ? 50503 : 50407)) &&
+        substr($url, 0, 2) === '//'
+    ) {
+        // a relative-scheme URL has no scheme
+        if ((int)$component == PHP_URL_SCHEME) {
+            return null;
+        }
+        // add a dummy scheme so it gets parsed properly
+        $res = \parse_url("f:$url", $component);
+        // remove the dummy scheme
+        if (is_array($res)) {
+            unset($res['scheme']);
+        }
+        return $res;
+    } else {
+        return \parse_url($url, $component);
+    }
+}
+
+/**
  * Parse a query string into an associative array.
  *
  * If multiple values are found for the same key, the value of that key
