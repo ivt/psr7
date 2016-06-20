@@ -7,10 +7,8 @@ use Psr\Http\Message\StreamInterface;
  * Stream that when read returns bytes for a streaming multipart or
  * multipart/form-data stream.
  */
-class MultipartStream implements StreamInterface
+class MultipartStream extends StreamDecoratorTrait implements StreamInterface
 {
-    use StreamDecoratorTrait;
-
     private $boundary;
 
     /**
@@ -28,7 +26,7 @@ class MultipartStream implements StreamInterface
     public function __construct(array $elements = array(), $boundary = null)
     {
         $this->boundary = $boundary ?: uniqid();
-        $this->stream = $this->createStream($elements);
+        $this->stream = $this->_createStream($elements);
     }
 
     /**
@@ -62,7 +60,7 @@ class MultipartStream implements StreamInterface
     /**
      * Create the aggregate stream that will be used to upload the POST data
      */
-    protected function createStream(array $elements)
+    protected function _createStream(array $elements)
     {
         $stream = new AppendStream();
 

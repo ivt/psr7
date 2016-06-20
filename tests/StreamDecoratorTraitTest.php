@@ -5,9 +5,8 @@ use Psr\Http\Message\StreamInterface;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\StreamDecoratorTrait;
 
-class Str implements StreamInterface
+class Str extends StreamDecoratorTrait implements StreamInterface
 {
-    use StreamDecoratorTrait;
 }
 
 /**
@@ -129,9 +128,7 @@ class StreamDecoratorTraitTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class BadStream
+class BadStream extends StreamDecoratorTrait
 {
-    use StreamDecoratorTrait;
-
     public function __construct() {}
 }

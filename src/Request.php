@@ -9,12 +9,8 @@ use Psr\Http\Message\UriInterface;
 /**
  * PSR-7 request implementation.
  */
-class Request implements RequestInterface
+class Request extends MessageTrait implements RequestInterface
 {
-    use MessageTrait {
-        withHeader as protected withParentHeader;
-    }
-
     /** @var string */
     private $method;
 
@@ -131,7 +127,7 @@ class Request implements RequestInterface
     public function withHeader($header, $value)
     {
         /** @var Request $newInstance */
-        $newInstance = $this->withParentHeader($header, $value);
+        $newInstance = parent::withHeader($header, $value);
         return $newInstance;
     }
 
