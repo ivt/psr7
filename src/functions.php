@@ -499,6 +499,14 @@ function parse_response($message)
     );
 }
 
+if (!defined('PHP_QUERY_RFC1738')) {
+    define('PHP_QUERY_RFC1738', 1);
+}
+
+if (!defined('PHP_QUERY_RFC3986')) {
+    define('PHP_QUERY_RFC3986', 2);
+}
+
 /**
  * Parse a query string into an associative array.
  *
